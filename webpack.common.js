@@ -1,71 +1,57 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  target: 'web',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js',
+    publicPath: '/',
   },
-  watchOptions: {
-    ignored: ['**/*/__tests__/*.js', '**/node_modules'],
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin(
-      {
-        filename: 'index.html',
-        template: path.resolve(__dirname, './src/index.html'),
-      },
-    ),
-    new MiniCssExtractPlugin(
-      {
-        filename: 'style.css',
-      },
-    )],
   module: {
     rules: [
       {
-        test: /\.m?js$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
         },
       },
       {
-        test: /\.html$/i,
-        loader: 'html-loader',
-      },
-      {
-        test: /\.css$/i,
+        test: /\.html$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: (resourcePath, context) => `${path.relative(path.dirname(resourcePath), context)}/`,
-            },
+            loader: 'html-loader',
           },
-          'css-loader'],
+        ],
       },
       {
-        test: /\.(png|jpe?g|gif|webp|ico)$/i,
-        type: 'asset/resource',
-        generator: {
-          outputPath: 'assets/img',
-        },
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader, 'css-loader',
+        ],
       },
       {
-        test: /\.svg/i,
+        test: /\.svg$/,
         type: 'asset/resource',
         generator: {
+          publicPath: 'assets/svg/',
           outputPath: 'assets/svg',
+          filename: '[name][ext][query]',
         },
       },
     ],
   },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: './src/index.html',
+      filename: './index.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+    new CleanWebpackPlugin(),
+  ],
 };

@@ -1,14 +1,14 @@
 {
-  "name": "ahg-2-1-dom",
+  "name": "ahg-1-env",
   "version": "1.0.0",
   "description": "",
   "private": true,
   "scripts": {
     "test": "jest --coverage",
-    "start": "webpack serve --open --mode development",
-    "build": "webpack --mode production",
+    "start": "webpack serve --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "lint": "eslint ./",
-    "lint:fix": "eslint ./ --fix",
+    "lint:fix": "eslint --fix ./",
     "prepare": "husky install && npx husky add .husky/pre-commit \"npm run lint && npm run test\""
   },
   "repository": {
