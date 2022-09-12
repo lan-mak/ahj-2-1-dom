@@ -41,6 +41,15 @@ module.exports = {
           filename: '[name][ext][query]',
         },
       },
+      {
+        test: /\.png$/,
+        type: 'asset/resource',
+        generator: {
+          publicPath: 'assets/img/',
+          outputPath: 'assets/img',
+          filename: '[name][ext][query]',
+        },
+      },
     ],
   },
   plugins: [
