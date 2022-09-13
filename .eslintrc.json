@@ -1,10 +1,8 @@
 {
   "env": {
-   
     "browser": true,
-    "es2021": true,
-    "es6": true,
-    "jest/globals": true
+    "es2018": true,
+    "jest": true
   },
   "extends": [
     "airbnb-base"
