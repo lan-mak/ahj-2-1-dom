@@ -1,4 +1,5 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/q622inx5e5olmi10?svg=true)](https://ci.appveyor.com/project/lan-mak/ahj-2-1-dom)
+GitHub pages: https://lan-mak.github.io/ahj-2-1-dom/
 
 Правила сдачи задания:
 
